@@ -2,19 +2,19 @@ const { ObjectId } = require('mongodb') // instalando e utilizando a depedencia 
 const conn = require('../db/conn') // exportando o banco de dados
 
 class Product {
-  constructor(name, price, description, image) {
+  constructor(name,image, price, description) {
     this.name = name
+    this.image = image
     this.price = price
     this.description = description
-    this.image = image
   }
 
   save() {
     const product = conn.db().collection('products').insertOne({
       name: this.name,
+      image: this.image,
       price: this.price,
       description: this.description,
-      image: this.image,
     })
 
     return product
@@ -47,6 +47,14 @@ class Product {
       .db()
       .collection('products')
       .deleteOne({ _id: new ObjectId(id) })
+    return
+  }
+
+  updateProduct(id) {
+    conn
+      .db()
+      .collection('products')
+      .updateOne({ _id: new ObjectId(id) }, { $set: this })
     return
   }
 }
