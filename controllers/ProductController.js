@@ -15,11 +15,11 @@ module.exports = class ProductController {
 
   static createProductPost(req, res) {
     const name = req.body.name
+    const image = req.body.image
     const price = req.body.price
     const description = req.body.description
-    const image = req.body.image
 
-    const product = new Product(name, price, description, image)
+    const product = new Product(name,image, price, description)
 
     product.save()
 
