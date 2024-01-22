@@ -1,6 +1,6 @@
 const Product = require('../models/Product')
 
-module.exports = class ToughController {
+module.exports = class ProductController {
   static async showProducts(req, res) {
     const products = await Product.getProducts()
 
@@ -34,5 +34,21 @@ module.exports = class ToughController {
     console.log(product)
 
     res.render('products/product', { product })
+  }
+
+    static removeProduct(req, res) {
+    const id = req.params.id
+
+    Product.removeProductById(id)
+
+    res.redirect('/')
+  }
+
+  static async editProduct(req, res) {
+    const id = req.params.id
+
+    const product = await Product.getProductById(id)
+
+    res.render('products/edit', { product })
   }
 }

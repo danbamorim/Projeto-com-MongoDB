@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb')
-const conn = require('../db/conn')
+const { ObjectId } = require('mongodb') // instalando e utilizando a depedencia ObjectId 
+const conn = require('../db/conn') // exportando o banco de dados
 
 class Product {
   constructor(name, price, description, image) {
@@ -38,10 +38,20 @@ class Product {
       .db()
       .collection('products')
       .findOne({ _id: new ObjectId(id) }); // Corrigindo o uso de new
-  
+
     return product;
   }
 
+  static async removeProductById(id) {
+    await conn
+      .db()
+      .collection('products')
+      .deleteOne({ _id: new ObjectId(id) })
+    return
+  }
 }
+
+
+//MOELS: PRODUCT.JS : são responsáveis por representar e manipular a lógica de dados da aplicação
 
 module.exports = Product

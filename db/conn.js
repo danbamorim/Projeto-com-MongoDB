@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
-// Connection URI
+// conexao com  URI
 const uri = "mongodb://localhost:27017/testemongodb";
-// Create a new MongoClient
+// Criando um novo MongoClient
 const client = new MongoClient(uri);
 async function run() {
   try {
